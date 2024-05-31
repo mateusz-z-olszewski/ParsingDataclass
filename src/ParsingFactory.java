@@ -11,10 +11,10 @@ public class ParsingFactory<T> {
         System.out.println("String");
         return null; // todo
     }
-    public List<T> parse(Collection<String> strings){
+    public T[] parse(Collection<String> strings){
         return parse(strings.toArray(String[]::new));
     }
-    public List<T> parse(String... strings){
+    public T[] parse(String... strings){
         System.out.println("String...");
         return null; // todo
     }
