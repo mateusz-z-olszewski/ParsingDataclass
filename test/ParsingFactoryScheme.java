@@ -1,16 +1,15 @@
 import org.junit.jupiter.api.*;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParsingFactoryScheme {
     @Test
     void exampleUsageCarsTest(){
-        ParsingFactory<Car> pf = new ParsingFactory<>(Car.class);
+        ParsingFactory<Car> pf = ParsingFactory.of(Car.class);
 
         Car volvo = new Car("Volvo", 1989, "Graphite");
-        Car ford = new Car("Ford", 2010, "White");
-        Car saab = new Car("Saab", 2001, "Navy blue");
+        Car ford  = new Car("Ford" , 2010, "White");
+        Car saab  = new Car("Saab" , 2001, "Navy blue");
 
         Car first = pf.parse("Car[brand=Volvo,year=1989,color=Graphite]");
         assertEquals(volvo, first);
@@ -25,7 +24,7 @@ public class ParsingFactoryScheme {
 
     @Test
     void exampleUsageBikesTest(){
-        ParsingFactory<FixedGearBike> pf = new ParsingFactory<>(FixedGearBike.class);
+        ParsingFactory<FixedGearBike> pf = ParsingFactory.of(FixedGearBike.class);
 
         FixedGearBike cityBike = new FixedGearBike();
         cityBike.model = "City Bike brand ABC";
@@ -35,5 +34,34 @@ public class ParsingFactoryScheme {
 
 
         assertEquals(cityBike, pf.parse("Bike(City Bike brand ABC,1234,Black)"));
+    }
+
+    @Test
+    void exampleUsageMuseumsTest(){
+        ParsingFactory<Museum> pf = ParsingFactory.of(Museum.class);
+
+        Museum m1 = new Museum("Musee d'Orsay", 4.7f);
+        assertEquals(m1, pf.parse("Musee d'Orsay:4.7"));
+    }
+
+    @Test
+    void invalidUsagesDogTest(){
+        assertThrows(InvalidDataclassException.class, ()->{
+            var pf = ParsingFactory.of(Dog.class);
+        });
+    }
+
+    @Test
+    void invalidUsagesCatTest(){
+        assertThrows(InvalidDataclassException.class, ()->{
+            var pf = ParsingFactory.of(Cat.class);
+        });
+    }
+
+    @Test
+    void invalidUsagesParrotTest(){
+        assertThrows(InvalidDataclassException.class, ()->{
+            var pf = ParsingFactory.of(Parrot.class);
+        });
     }
 }

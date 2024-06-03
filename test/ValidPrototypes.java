@@ -1,16 +1,7 @@
-import java.util.HashMap;
 class Car {
     private final String brand;
     private final int year;
     private final String color;
-
-    private static HashMap<String, Car> carDatabase = new HashMap<>();
-    {
-        carDatabase.put(
-                "1234567890SE123456",
-                new Car("Saab", 2001, "Navy blue")
-        );
-    }
 
 
     @Parses("Car\\[brand=(.+?),year=(\\d{4}),color=(.*?)\\]")
@@ -18,11 +9,6 @@ class Car {
         this.brand = brand;
         this.year = year;
         this.color = color;
-    }
-
-    @Parses("Car\\[vin=(\\d{10}\\w{2}\\d{6}\\]")
-    public static Car fromVIN(String x){
-        return carDatabase.get(x);
     }
 }
 
@@ -48,3 +34,10 @@ class FixedGearBike {
         return sb.toString();
     }
 }
+
+
+@ParsingDataclass("([-a-zA-Z ']+):([\\d.]+) stars\\.")
+record Museum (
+        String name,
+        float visitorRating
+) {}
