@@ -4,6 +4,7 @@ out/
 !**/src/test/**/out/
 *.iml
 .idea/*.xml
+.idea/
 
 ### Eclipse ###
 .apt_generated
@@ -29,3 +30,4 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/.idea/inspectionProfiles/Project_Default.xml

@@ -36,8 +36,8 @@ class FixedGearBike {
 }
 
 
-@ParsingDataclass("([-a-zA-Z ']+):([\\d.]+) stars\\.")
-record Museum (
+@ParsingDataclass("([-a-zA-Z ']+):([\\d.]+) stars\\.?")
+record Museum(
         String name,
         float visitorRating
 ) {}

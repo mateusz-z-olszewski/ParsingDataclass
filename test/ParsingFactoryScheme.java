@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ParsingFactoryScheme {
     @Test
-    void exampleUsageCarsTest(){
+    void exampleUsageCarsTest() throws ParsingException {
         ParsingFactory<Car> pf = ParsingFactory.of(Car.class);
 
         Car volvo = new Car("Volvo", 1989, "Graphite");
@@ -23,7 +23,7 @@ public class ParsingFactoryScheme {
     }
 
     @Test
-    void exampleUsageBikesTest(){
+    void exampleUsageBikesTest() throws ParsingException {
         ParsingFactory<FixedGearBike> pf = ParsingFactory.of(FixedGearBike.class);
 
         FixedGearBike cityBike = new FixedGearBike();
@@ -37,11 +37,11 @@ public class ParsingFactoryScheme {
     }
 
     @Test
-    void exampleUsageMuseumsTest(){
+    void exampleUsageMuseumsTest() throws ParsingException {
         ParsingFactory<Museum> pf = ParsingFactory.of(Museum.class);
 
         Museum m1 = new Museum("Musee d'Orsay", 4.7f);
-        assertEquals(m1, pf.parse("Musee d'Orsay:4.7"));
+        assertEquals(m1, pf.parse("Musee d'Orsay:4.7 stars"));
     }
 
     @Test
