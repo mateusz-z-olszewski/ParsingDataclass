@@ -2,7 +2,7 @@ import java.lang.reflect.Method;
 import java.util.regex.Pattern;
 
 final class ParsingMethodFactory<T> extends ParsingFactory<T> {
-    private Method method;
+    private final Method method;
 
     /**
      * Constructor for this subtype ParsingFactory from a static method following the factory pattern.
@@ -26,6 +26,8 @@ final class ParsingMethodFactory<T> extends ParsingFactory<T> {
     @Override
     protected T instantiate(Object[] args) {
         return null;
+
+        // todo
     }
 
 }
