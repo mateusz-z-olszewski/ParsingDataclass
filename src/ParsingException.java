@@ -5,11 +5,14 @@
  * This is not a runtime exception, because it can be expected that parsing an unknown
  * input fails.
  */
-public class ParsingException extends Exception {
+public class ParsingException extends RuntimeException {
     public ParsingException(){
         super();
     }
     public ParsingException(String s){
         super(s);
+    }
+    public ParsingException(Exception e) {
+        super(e);
     }
 }
