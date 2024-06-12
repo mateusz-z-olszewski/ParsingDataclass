@@ -11,7 +11,7 @@ public final class ParsingConstructorFactory<T> extends ParsingFactory<T> {
      * @param constructor constructor annotated with @{link Parses}. Precondition:
      *  {@code constructor.getAnnotation(Parses.class) != null}
      */
-    public ParsingConstructorFactory(Class<? extends T> cls, Constructor<T> constructor) {
+    ParsingConstructorFactory(Class<? extends T> cls, Constructor<T> constructor) {
         super(cls, constructor.getParameterTypes());
 
         this.constructor = constructor;
@@ -23,7 +23,8 @@ public final class ParsingConstructorFactory<T> extends ParsingFactory<T> {
         try {
             return constructor.newInstance(args);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new ParsingException(e);
+            throw new ParsingException("Unknown error occurred when trying to create " +
+                    "instance of class "+cls.getCanonicalName()+".");
         }
     }
 }

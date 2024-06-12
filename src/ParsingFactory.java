@@ -33,14 +33,14 @@ abstract public sealed class ParsingFactory<T>
 
     private final static HashMap<Class<?>, ParsingFactory<?>> instances
             = new HashMap<>();
-    protected final HashMap<Class<?>, Function<String, Object>> builtinDeserializers
+    protected final static HashMap<Class<?>, Function<String, Object>> builtinDeserializers
             = new HashMap<>();
 
-    {
+    static {
         initializeBuiltinDeserializers();
     }
 
-    private void initializeBuiltinDeserializers() {
+    private static void initializeBuiltinDeserializers() {
         // initialize resolving for builtins
         builtinDeserializers.put(String.class, x -> x);
         builtinDeserializers.put(float.class, Float::valueOf);
@@ -82,20 +82,26 @@ abstract public sealed class ParsingFactory<T>
      *
      * @param string string to be parsed
      * @return instance of {@code T} created from the given string, or {@code null} if
-     * the pattern failed to match.
+     * the pattern failed to match, or input is null itself.
      * @throws ParsingException if the object could not have been instantiated, or pattern matched
      *                          an incorrect number of times.
      */
     public T parse(String string) {
+        if(string == null) return null;
         Matcher m = this.pattern.matcher(string);
         if (!m.matches()) return null;
         int groups = m.groupCount();
         // create array of arguments that will be used to
         // instantiate an instance (from match groups).
-        String[] stringArgs = new String[groups];
-        for (int i = 0; i < stringArgs.length; i++) {
-            stringArgs[i] = m.group(i + 1);
+        // important: skips empty groups.
+        String[] strings = new String[groups];
+        int s = 0;
+        for (int i = 1; i <= groups; i++) {
+            String stringArg = m.group(i);
+            if(stringArg != null) strings[s++] = m.group(i);
         }
+        String[] stringArgs = new String[s];
+        System.arraycopy(strings, 0, stringArgs, 0, s);
         // deserialize groups into Objects
         Object[] args = deserializeGroups(stringArgs);
         // initialize instance using the given arguments (now deserialized into Objects)
@@ -127,7 +133,6 @@ abstract public sealed class ParsingFactory<T>
      */
     @SuppressWarnings("unchecked")
     public T[] parse(String... strings) throws ParsingException {
-        System.out.println("String...");
         T[] out = (T[]) Array.newInstance(cls, strings.length);
         for (int i = 0; i < strings.length; i++) {
             out[i] = parse(strings[i]);
@@ -155,10 +160,10 @@ abstract public sealed class ParsingFactory<T>
 
         argumentsAssert(ann != null || executable != null,
                 "The given class contains neither @ParsingDataclass annotation " +
-                        "nor a executable with @Parses annotation.");
-        argumentsAssert(ann != null ^ executable != null,
+                        "nor an executable with @Parses annotation.");
+        argumentsAssert(ann == null || executable == null,
                 "The given class contains both @ParsingDataclass annotation " +
-                        "and a executable with @Parses annotation.");
+                        "and am executable with @Parses annotation.");
 
         if (ann != null)
             return new ParsingDataclassFactory<>(cls, Pattern.compile(ann.value()));
@@ -167,6 +172,8 @@ abstract public sealed class ParsingFactory<T>
             return new ParsingConstructorFactory<>(cls, (Constructor<U>)executable);
         else
             return new ParsingMethodFactory<>(cls, (Method) executable);
+
+        // todo refactor
     }
 
     protected ParsingFactory(Class<? extends T> cls, Class<?>[] types) {

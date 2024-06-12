@@ -10,7 +10,7 @@ final class ParsingMethodFactory<T> extends ParsingFactory<T> {
      * @param method method annotated with @{link Parses}. Precondition:
      *  {@code method.getAnnotation(Parses.class) != null}
      */
-    public ParsingMethodFactory(Class<? extends T> cls, Method method) {
+    ParsingMethodFactory(Class<? extends T> cls, Method method) {
         super(cls, method.getParameterTypes());
 
         argumentsAssert(cls.isAssignableFrom(method.getReturnType()),

@@ -46,7 +46,7 @@ final class ParsingRecordFactory<T> extends ParsingFactory<T> {
         try {
             return constructor.newInstance(args);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new ParsingException("Could not instantiate instance of record " + cls.getCanonicalName() + ".");
+            throw new ParsingException("Could not create instance of record " + cls.getCanonicalName() + ".");
         }
     }
 
