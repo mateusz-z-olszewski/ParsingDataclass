@@ -193,8 +193,8 @@ abstract public sealed class ParsingFactory<T>
     /**
      * Finds the sole method annotated with @Parses inside the given class.
      *
-     * @return the method that is searched for or null if one does not exist
-     * @throws InvalidDataclassException if there is more than one such method
+     * @return the method that is searched for, or null if one does not exist.
+     * @throws InvalidDataclassException if there is more than one such method.
      */
     private static Executable findParsingMethod(Class<?> cls) {
         var stream = Stream.concat(
