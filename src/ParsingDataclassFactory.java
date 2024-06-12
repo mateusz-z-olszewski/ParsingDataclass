@@ -5,20 +5,20 @@ import java.util.regex.Pattern;
 final class ParsingDataclassFactory<T> extends ParsingFactory<T> {
     private final Constructor<T> noArgumentConstructor;
     private final Field[] fields;
-    public ParsingDataclassFactory(Class<T> cls, Pattern pattern) {
+    ParsingDataclassFactory(Class<T> cls, Pattern pattern) {
         this(cls, pattern, findConstructor(cls), findFields(cls));
     }
 
 
 
-    public ParsingDataclassFactory(Class<T> cls, Pattern pattern, Constructor<T> constructor, Field[] fields){
+    ParsingDataclassFactory(Class<T> cls, Pattern pattern, Constructor<T> constructor, Field[] fields){
         super(
                 cls,
+                pattern,
                 Arrays.stream(fields).map(Field::getType).toArray(Class<?>[]::new)
         );
 
         this.noArgumentConstructor = constructor;
-        this.pattern = pattern;
         this.fields = fields;
 
         for (var f : fields){

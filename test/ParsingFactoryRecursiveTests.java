@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedWriter;
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -8,8 +7,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @ParsingDataclass("#(\\d+)")
 class Ordinal {
     int index;
-    public Ordinal(){}
-    public Ordinal(int index){
+
+    public Ordinal() {
+    }
+
+    public Ordinal(int index) {
         this.index = index;
     }
 
@@ -32,8 +34,9 @@ class Ordinal {
 class Sheep {
     String name;
     Ordinal ordinal;
+
     @Parses("Sheep called ([^:]+): ?(.+)")
-    Sheep (String name, Ordinal ordinal){
+    Sheep(String name, Ordinal ordinal) {
         this.name = name;
         this.ordinal = ordinal;
     }
@@ -56,13 +59,14 @@ class Sheep {
 @ParsingDataclass("Object<(.+)>")
 record ObjectWrapper(
         Object o
-) {}
+) {
+}
 
 public class ParsingFactoryRecursiveTests {
     final ParsingFactory<Sheep> pf = ParsingFactory.of(Sheep.class);
 
     @Test
-    void simpleRecursiveTest(){
+    void simpleRecursiveTest() {
         assertEquals(
                 new Sheep("Shaun", new Ordinal(1)),
                 pf.parse("Sheep called Shaun: #1")
@@ -70,7 +74,7 @@ public class ParsingFactoryRecursiveTests {
     }
 
     @Test
-    void invalidFieldClassTest(){
-        assertThrows(InvalidDataclassException.class, ()->ParsingFactory.of(ObjectWrapper.class));
+    void invalidFieldClassTest() {
+        assertThrows(InvalidDataclassException.class, () -> ParsingFactory.of(ObjectWrapper.class));
     }
 }

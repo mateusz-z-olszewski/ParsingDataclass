@@ -28,7 +28,7 @@ abstract public sealed class ParsingFactory<T>
     protected final Class<? extends T> cls;
     protected final ParsingFactory<?>[] parsingFactories;
     protected final Class<?>[] types;
-    protected Pattern pattern;
+    protected final Pattern pattern;
 
 
     private final static HashMap<Class<?>, ParsingFactory<?>> instances
@@ -176,8 +176,9 @@ abstract public sealed class ParsingFactory<T>
         // todo refactor
     }
 
-    protected ParsingFactory(Class<? extends T> cls, Class<?>[] types) {
+    protected ParsingFactory(Class<? extends T> cls, Pattern pattern, Class<?>[] types) {
         this.cls = cls;
+        this.pattern = pattern;
         this.types = types;
 
         parsingFactories = new ParsingFactory[types.length];

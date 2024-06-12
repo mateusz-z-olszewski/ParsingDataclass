@@ -12,10 +12,13 @@ public final class ParsingConstructorFactory<T> extends ParsingFactory<T> {
      *  {@code constructor.getAnnotation(Parses.class) != null}
      */
     ParsingConstructorFactory(Class<? extends T> cls, Constructor<T> constructor) {
-        super(cls, constructor.getParameterTypes());
+        super(
+                cls,
+                Pattern.compile(constructor.getAnnotation(Parses.class).value()),
+                constructor.getParameterTypes()
+        );
 
         this.constructor = constructor;
-        this.pattern = Pattern.compile(constructor.getAnnotation(Parses.class).value());
     }
 
     @Override
