@@ -12,7 +12,7 @@ record InvalidCharWrapper(
     }
 }
 
-public class InvalidRecordWithParsesAnnotations {
+public class InvalidRecordWithParsesAnnotationsTest {
     @Test
     void invalidRecordTest(){
         assertThrows(InvalidDataclassException.class, ()->ParsingFactory.of(InvalidCharWrapper.class));

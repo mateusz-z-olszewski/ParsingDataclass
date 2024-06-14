@@ -13,7 +13,7 @@ record Record1 (int value){
     }
 }
 
-public class InvalidManyAnnotations4 {
+public class InvalidManyAnnotations4Test {
     @Test
     void invalidManyAnnotations1Test(){
         assertThrows(InvalidDataclassException.class, ()->ParsingFactory.of(Record1.class));

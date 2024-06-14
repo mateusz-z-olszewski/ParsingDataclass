@@ -150,8 +150,10 @@ abstract public sealed class ParsingFactory<T>
         if (cls.isRecord())
             return new ParsingRecordFactory<>(cls);
 
-        argumentsAssert(!cls.isHidden(),
-                "The given class is hidden.");
+        // Not a single person is going to casually create a hidden class and pass it to the
+        // .of method, and if they did, it's totally on them.
+        // argumentsAssert(!cls.isHidden(),
+        //         "The given class is hidden.");
         argumentsAssert(!Modifier.isAbstract(cls.getModifiers()),
                 "The given class is abstract.");
 

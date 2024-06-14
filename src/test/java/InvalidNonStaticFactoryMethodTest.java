@@ -13,7 +13,7 @@ class Egg {
     }
 }
 
-public class InvalidNonStaticFactoryMethod {
+public class InvalidNonStaticFactoryMethodTest {
     @Test
     void invalidFactoryMethodTest(){
         assertThrows(InvalidDataclassException.class, ()->ParsingFactory.of(Egg.class));

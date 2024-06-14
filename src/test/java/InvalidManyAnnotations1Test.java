@@ -19,7 +19,7 @@ class Cat {
     }
 }
 
-public class InvalidManyAnnotations1 {
+public class InvalidManyAnnotations1Test {
     @Test
     void invalidUsageTest(){
         assertThrows(InvalidDataclassException.class, ()->ParsingFactory.of(Cat.class));

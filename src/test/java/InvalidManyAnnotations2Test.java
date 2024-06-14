@@ -23,7 +23,7 @@ class Dog {
     }
 }
 
-public class InvalidManyAnnotations2 {
+public class InvalidManyAnnotations2Test {
     @Test
     void invalidUsageTest(){
         assertThrows(InvalidDataclassException.class, ()->ParsingFactory.of(Dog.class));

@@ -24,7 +24,7 @@ class Parrot {
     }
 }
 
-public class InvalidManyAnnotations3 {
+public class InvalidManyAnnotations3Test {
     @Test
     void invalidUsageTest(){
         assertThrows(InvalidDataclassException.class, ()->ParsingFactory.of(Parrot.class));
