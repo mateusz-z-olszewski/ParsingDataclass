@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
@@ -18,7 +20,7 @@ class Boat {
 
     // observe usage of non-capturing groups (using ?:). This is crucial to
     // make sure that the class is parsed correctly.
-    @Parses("(?:Vessel|Boat|Ship) named ([a-zA-Z ]+)")
+    @Parses("(?:Vessel|dev.olszewski.parsingdataclass.Boat|Ship) named ([a-zA-Z ]+)")
     public static Boat brandNewBoatFromName(String name){
         return new Boat(name, 2024);
     }

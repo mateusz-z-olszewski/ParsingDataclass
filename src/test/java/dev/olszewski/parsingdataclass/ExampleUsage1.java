@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,7 +14,7 @@ class Car {
     private final String color;
 
 
-    @Parses("Car\\[brand=(.+?),year=(\\d{4}),color=(.*?)\\]")
+    @Parses("dev.olszewski.parsingdataclass.Car\\[brand=(.+?),year=(\\d{4}),color=(.*?)\\]")
     public Car(String brand, int year, String color) {
         this.brand = brand;
         this.year = year;
@@ -48,19 +50,19 @@ public class ExampleUsage1 {
         Car volvo = new Car("Volvo", 1989, "Graphite");
         Car ford = new Car("Ford", 2010, "White");
 
-        Car first = pf.parse("Car[brand=Volvo,year=1989,color=Graphite]");
+        Car first = pf.parse("dev.olszewski.parsingdataclass.Car[brand=Volvo,year=1989,color=Graphite]");
         assertEquals(volvo, first);
 
         var cars = new String[]{
-                "Car[brand=Volvo,year=1989,color=Graphite]",
-                "Car[brand=Ford,year=2010,color=White]"
+                "dev.olszewski.parsingdataclass.Car[brand=Volvo,year=1989,color=Graphite]",
+                "dev.olszewski.parsingdataclass.Car[brand=Ford,year=2010,color=White]"
         };
         Car[] parkingLot = pf.parse(cars);
         var expected = new Car[]{volvo, ford};
         assertArrayEquals(expected, parkingLot);
         assertArrayEquals(expected, pf.parse(List.of(
-                "Car[brand=Volvo,year=1989,color=Graphite]",
-                "Car[brand=Ford,year=2010,color=White]"
+                "dev.olszewski.parsingdataclass.Car[brand=Volvo,year=1989,color=Graphite]",
+                "dev.olszewski.parsingdataclass.Car[brand=Ford,year=2010,color=White]"
         )));
     }
 }

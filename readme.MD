@@ -1,4 +1,4 @@
-# ParsingDataclass
+# dev.olszewski.parsingdataclass.ParsingDataclass
 
 A utility library for parsing classes from strings using regular expressions.
 

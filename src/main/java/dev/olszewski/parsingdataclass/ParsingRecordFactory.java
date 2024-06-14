@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -32,12 +34,12 @@ final class ParsingRecordFactory<T> extends ParsingFactory<T> {
                 .filter(Objects::nonNull)
                 .findFirst().ifPresent(x -> {
                     throw new InvalidDataclassException(
-                            "Records may not contain @Parses annotations on methods.");
+                            "Records may not contain @dev.olszewski.parsingdataclass.Parses annotations on methods.");
                 });
 
         var ann = cls.getAnnotation(ParsingDataclass.class);
         argumentsAssert(ann != null,
-                "The given record contains no @ParsingDataclass annotation.");
+                "The given record contains no @dev.olszewski.parsingdataclass.ParsingDataclass annotation.");
 
         return Pattern.compile(ann.value());
     }

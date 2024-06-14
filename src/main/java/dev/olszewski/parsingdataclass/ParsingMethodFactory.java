@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -10,10 +12,10 @@ final class ParsingMethodFactory<T> extends ParsingFactory<T> {
     private final Method method;
 
     /**
-     * Constructor for this subtype ParsingFactory from a static method following the factory pattern.
+     * Constructor for this subtype dev.olszewski.parsingdataclass.ParsingFactory from a static method following the factory pattern.
      * @param cls class.
-     * @param method method annotated with @{link Parses}. Precondition:
-     *  {@code method.getAnnotation(Parses.class) != null}
+     * @param method method annotated with @{link dev.olszewski.parsingdataclass.Parses}. Precondition:
+     *  {@code method.getAnnotation(dev.olszewski.parsingdataclass.Parses.class) != null}
      */
     ParsingMethodFactory(Class<? extends T> cls, Method method) {
         super(

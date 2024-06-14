@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.RecordComponent;
 import java.util.Arrays;

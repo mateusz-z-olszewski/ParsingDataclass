@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.Collection;
@@ -56,7 +58,7 @@ abstract public sealed class ParsingFactory<T>
     }
 
     /**
-     * Returns a ParsingFactory instance of the given class. Caches already instantiated instances
+     * Returns a dev.olszewski.parsingdataclass.ParsingFactory instance of the given class. Caches already instantiated instances
      * to speed up the process of creation. To avoid caching, use
      * {@link ParsingFactory#createParsingFactoryOf(Class)}
      *
@@ -109,7 +111,7 @@ abstract public sealed class ParsingFactory<T>
     }
 
     /**
-     * Parses multiple strings at the same time.
+     * dev.olszewski.parsingdataclass.Parses multiple strings at the same time.
      *
      * @param strings String instances to be parsed.
      * @return Array of parsed objects. Returns null/empty if is given collection is null/empty respectively.
@@ -125,7 +127,7 @@ abstract public sealed class ParsingFactory<T>
     }
 
     /**
-     * Parses multiple strings at the same time.
+     * dev.olszewski.parsingdataclass.Parses multiple strings at the same time.
      *
      * @param strings String instances to be parsed.
      * @return Array of parsed objects
@@ -161,11 +163,11 @@ abstract public sealed class ParsingFactory<T>
         Executable executable = findParsingMethod(cls);
 
         argumentsAssert(ann != null || executable != null,
-                "The given class contains neither @ParsingDataclass annotation " +
-                        "nor an executable with @Parses annotation.");
+                "The given class contains neither @dev.olszewski.parsingdataclass.ParsingDataclass annotation " +
+                        "nor an executable with @dev.olszewski.parsingdataclass.Parses annotation.");
         argumentsAssert(ann == null || executable == null,
-                "The given class contains both @ParsingDataclass annotation " +
-                        "and am executable with @Parses annotation.");
+                "The given class contains both @dev.olszewski.parsingdataclass.ParsingDataclass annotation " +
+                        "and am executable with @dev.olszewski.parsingdataclass.Parses annotation.");
 
         if (ann != null)
             return new ParsingDataclassFactory<>(cls, Pattern.compile(ann.value()));
@@ -174,8 +176,6 @@ abstract public sealed class ParsingFactory<T>
             return new ParsingConstructorFactory<>(cls, (Constructor<U>)executable);
         else
             return new ParsingMethodFactory<>(cls, (Method) executable);
-
-        // todo refactor
     }
 
     protected ParsingFactory(Class<? extends T> cls, Pattern pattern, Class<?>[] types) {
@@ -193,7 +193,7 @@ abstract public sealed class ParsingFactory<T>
     }
 
     /**
-     * Finds the sole method annotated with @Parses inside the given class.
+     * Finds the sole method annotated with @dev.olszewski.parsingdataclass.Parses inside the given class.
      *
      * @return the method that is searched for, or null if one does not exist.
      * @throws InvalidDataclassException if there is more than one such method.
@@ -208,12 +208,12 @@ abstract public sealed class ParsingFactory<T>
                 .toArray(Executable[]::new);
         if (methods.length == 0) return null;
         argumentsAssert(methods.length == 1, "The given class " + cls.getCanonicalName()
-                + " contains more than one method with annotation @Parses.");
+                + " contains more than one method with annotation @dev.olszewski.parsingdataclass.Parses.");
         return methods[0];
     }
 
     /**
-     * Finds the {@code @ParsingDataclass} annotation of the given class.
+     * Finds the {@code @dev.olszewski.parsingdataclass.ParsingDataclass} annotation of the given class.
      *
      * @return the annotation that is searched for or null if one does not exist.
      */
@@ -234,7 +234,7 @@ abstract public sealed class ParsingFactory<T>
      * order of methods chosen to perform deserialization:
      * <ol>
      *  <li>Built-in deserializers (for primitive types, their boxed versions, and Strings),</li>
-     *  <li>ParsingFactory of the given declared type (in a recursive manner).</li>
+     *  <li>dev.olszewski.parsingdataclass.ParsingFactory of the given declared type (in a recursive manner).</li>
      * </ol>
      *
      * @param groups groups of a match (excluding the 0th group being the whole match)
@@ -260,7 +260,7 @@ abstract public sealed class ParsingFactory<T>
     }
 
     /**
-     * Create instance from method or constructor (depending on type of ParsingFactory).
+     * Create instance from method or constructor (depending on type of dev.olszewski.parsingdataclass.ParsingFactory).
      *
      * @param args arguments to the method
      * @return new instance

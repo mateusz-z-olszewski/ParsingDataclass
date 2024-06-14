@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.Objects;
@@ -35,7 +37,7 @@ class Sheep {
     String name;
     Ordinal ordinal;
 
-    @Parses("Sheep called ([^:]+): ?(.+)")
+    @Parses("dev.olszewski.parsingdataclass.Sheep called ([^:]+): ?(.+)")
     Sheep(String name, Ordinal ordinal) {
         this.name = name;
         this.ordinal = ordinal;
@@ -54,7 +56,7 @@ class Sheep {
 }
 
 /**
- * ParsingDataclass which has valid annotations, but has a field of class which is not parseable.
+ * dev.olszewski.parsingdataclass.ParsingDataclass which has valid annotations, but has a field of class which is not parseable.
  */
 @ParsingDataclass("Object<(.+)>")
 record ObjectWrapper(
@@ -69,7 +71,7 @@ public class ParsingFactoryRecursiveTests {
     void simpleRecursiveTest() {
         assertEquals(
                 new Sheep("Shaun", new Ordinal(1)),
-                pf.parse("Sheep called Shaun: #1")
+                pf.parse("dev.olszewski.parsingdataclass.Sheep called Shaun: #1")
         );
     }
 

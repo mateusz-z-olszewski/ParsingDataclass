@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,6 +17,6 @@ record InvalidCharWrapper(
 public class InvalidRecordWithParsesAnnotationsTest {
     @Test
     void invalidRecordTest(){
-        assertThrows(InvalidDataclassException.class, ()->ParsingFactory.of(InvalidCharWrapper.class));
+        assertThrows(InvalidDataclassException.class, ()-> ParsingFactory.of(InvalidCharWrapper.class));
     }
 }

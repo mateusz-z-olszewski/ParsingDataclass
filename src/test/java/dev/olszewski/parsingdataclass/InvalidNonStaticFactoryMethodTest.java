@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,6 +18,6 @@ class Egg {
 public class InvalidNonStaticFactoryMethodTest {
     @Test
     void invalidFactoryMethodTest(){
-        assertThrows(InvalidDataclassException.class, ()->ParsingFactory.of(Egg.class));
+        assertThrows(InvalidDataclassException.class, ()-> ParsingFactory.of(Egg.class));
     }
 }

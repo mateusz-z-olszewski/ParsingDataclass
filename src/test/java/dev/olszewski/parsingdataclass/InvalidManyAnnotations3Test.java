@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -27,7 +29,7 @@ class Parrot {
 public class InvalidManyAnnotations3Test {
     @Test
     void invalidUsageTest(){
-        assertThrows(InvalidDataclassException.class, ()->ParsingFactory.of(Parrot.class));
+        assertThrows(InvalidDataclassException.class, ()-> ParsingFactory.of(Parrot.class));
     }
 }
 

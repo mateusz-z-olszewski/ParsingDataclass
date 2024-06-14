@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,6 +18,6 @@ record Record1 (int value){
 public class InvalidManyAnnotations4Test {
     @Test
     void invalidManyAnnotations1Test(){
-        assertThrows(InvalidDataclassException.class, ()->ParsingFactory.of(Record1.class));
+        assertThrows(InvalidDataclassException.class, ()-> ParsingFactory.of(Record1.class));
     }
 }

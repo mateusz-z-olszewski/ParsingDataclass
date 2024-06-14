@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -81,7 +83,7 @@ final class ParsingDataclassFactory<T> extends ParsingFactory<T> {
     }
 
     /**
-     * Finds non-static fields of the class which are not annotated with @{@code NotParsed}
+     * Finds non-static fields of the class which are not annotated with @{@code dev.olszewski.parsingdataclass.NotParsed}
      */
     private static <T> Field[] findFields(Class<T> cls) {
         return Arrays.stream(cls.getDeclaredFields())

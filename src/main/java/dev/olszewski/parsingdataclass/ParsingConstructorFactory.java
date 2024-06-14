@@ -1,3 +1,5 @@
+package dev.olszewski.parsingdataclass;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Pattern;
@@ -6,10 +8,10 @@ public final class ParsingConstructorFactory<T> extends ParsingFactory<T> {
     private final Constructor<T> constructor;
 
     /**
-     * Constructor for this subtype ParsingFactory from a constructor.
+     * Constructor for this subtype dev.olszewski.parsingdataclass.ParsingFactory from a constructor.
      * @param cls class.
-     * @param constructor constructor annotated with @{link Parses}. Precondition:
-     *  {@code constructor.getAnnotation(Parses.class) != null}
+     * @param constructor constructor annotated with @{link dev.olszewski.parsingdataclass.Parses}. Precondition:
+     *  {@code constructor.getAnnotation(dev.olszewski.parsingdataclass.Parses.class) != null}
      */
     ParsingConstructorFactory(Class<? extends T> cls, Constructor<T> constructor) {
         super(
