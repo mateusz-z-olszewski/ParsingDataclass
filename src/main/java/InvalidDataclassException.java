@@ -6,7 +6,6 @@
  * and therefore can be checked by the developer to be valid.
  */
 public class InvalidDataclassException extends IllegalArgumentException  {
-    public InvalidDataclassException(){}
     public InvalidDataclassException(String s) {
         super(s);
     }

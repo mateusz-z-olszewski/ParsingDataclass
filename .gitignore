@@ -5,6 +5,7 @@ out/
 *.iml
 .idea/*.xml
 .idea/
+.run
 
 ### Eclipse ###
 .apt_generated
@@ -32,3 +33,7 @@ bin/
 .DS_Store
 /.idea/inspectionProfiles/Project_Default.xml
 /htmlReport/
+
+### Maven ###
+lib
+target
