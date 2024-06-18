@@ -1,6 +1,7 @@
 package dev.olszewski.parsingdataclass;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.RecordComponent;
 import java.util.Arrays;
 
@@ -21,6 +22,22 @@ public class Utils {
             return cls.getDeclaredConstructor(paramTypes);
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("Unexpected error encountered.");
+        }
+    }
+
+    /**
+     * Sets fields of a given new instance.
+     * @param instance freshly created new instance of T.
+     * @param args fields to be set, in order they appear in the class. Precondition: args.length==types.length
+     */
+    public static <T> void setFields(T instance, Field[] fields, Object[] args) {
+        for (int i = 0; i < fields.length; i++) {
+            var field = fields[i];
+            try {
+                field.set(instance, args[i]);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException("Unexpected error encountered.");
+            }
         }
     }
 }

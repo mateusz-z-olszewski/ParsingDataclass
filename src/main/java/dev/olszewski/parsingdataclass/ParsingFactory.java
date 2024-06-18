@@ -58,7 +58,7 @@ abstract public sealed class ParsingFactory<T>
     }
 
     /**
-     * Returns a dev.olszewski.parsingdataclass.ParsingFactory instance of the given class. Caches already instantiated instances
+     * Returns a ParsingFactory instance of the given class. Caches already instantiated instances
      * to speed up the process of creation. To avoid caching, use
      * {@link ParsingFactory#createParsingFactoryOf(Class)}
      *
@@ -111,7 +111,7 @@ abstract public sealed class ParsingFactory<T>
     }
 
     /**
-     * dev.olszewski.parsingdataclass.Parses multiple strings at the same time.
+     * Parses multiple strings at the same time.
      *
      * @param strings String instances to be parsed.
      * @return Array of parsed objects. Returns null/empty if is given collection is null/empty respectively.
@@ -127,7 +127,7 @@ abstract public sealed class ParsingFactory<T>
     }
 
     /**
-     * dev.olszewski.parsingdataclass.Parses multiple strings at the same time.
+     * Parses multiple strings at the same time.
      *
      * @param strings String instances to be parsed.
      * @return Array of parsed objects
@@ -193,7 +193,7 @@ abstract public sealed class ParsingFactory<T>
     }
 
     /**
-     * Finds the sole method annotated with @dev.olszewski.parsingdataclass.Parses inside the given class.
+     * Finds the sole method annotated with @Parses inside the given class.
      *
      * @return the method that is searched for, or null if one does not exist.
      * @throws InvalidDataclassException if there is more than one such method.
@@ -213,7 +213,7 @@ abstract public sealed class ParsingFactory<T>
     }
 
     /**
-     * Finds the {@code @dev.olszewski.parsingdataclass.ParsingDataclass} annotation of the given class.
+     * Finds the {@code @ParsingDataclass} annotation of the given class.
      *
      * @return the annotation that is searched for or null if one does not exist.
      */
@@ -234,7 +234,7 @@ abstract public sealed class ParsingFactory<T>
      * order of methods chosen to perform deserialization:
      * <ol>
      *  <li>Built-in deserializers (for primitive types, their boxed versions, and Strings),</li>
-     *  <li>dev.olszewski.parsingdataclass.ParsingFactory of the given declared type (in a recursive manner).</li>
+     *  <li>ParsingFactory of the given declared type (in a recursive manner).</li>
      * </ol>
      *
      * @param groups groups of a match (excluding the 0th group being the whole match)
@@ -260,7 +260,7 @@ abstract public sealed class ParsingFactory<T>
     }
 
     /**
-     * Create instance from method or constructor (depending on type of dev.olszewski.parsingdataclass.ParsingFactory).
+     * Create instance from method or constructor (depending on type of ParsingFactory).
      *
      * @param args arguments to the method
      * @return new instance

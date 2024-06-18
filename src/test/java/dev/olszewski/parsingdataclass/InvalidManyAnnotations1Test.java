@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Parsing dataclass containing both @dev.olszewski.parsingdataclass.ParsingDataclass and a parsing constructor
+ * Parsing dataclass containing both @ParsingDataclass and a parsing constructor
  */
 @ParsingDataclass("(\\w+), (\\d+) years?")
 class Cat {

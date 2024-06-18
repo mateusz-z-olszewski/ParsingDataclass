@@ -56,7 +56,7 @@ class Sheep {
 }
 
 /**
- * dev.olszewski.parsingdataclass.ParsingDataclass which has valid annotations, but has a field of class which is not parseable.
+ * ParsingDataclass which has valid annotations, but has a field of class which is not parseable.
  */
 @ParsingDataclass("Object<(.+)>")
 record ObjectWrapper(

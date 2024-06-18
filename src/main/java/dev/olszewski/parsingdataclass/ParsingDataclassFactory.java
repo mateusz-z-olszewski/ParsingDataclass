@@ -4,6 +4,8 @@ import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
+import static dev.olszewski.parsingdataclass.Utils.setFields;
+
 final class ParsingDataclassFactory<T> extends ParsingFactory<T> {
     private final Constructor<T> noArgumentConstructor;
     private final Field[] fields;
@@ -47,28 +49,13 @@ final class ParsingDataclassFactory<T> extends ParsingFactory<T> {
         try {
             instance = noArgumentConstructor.newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new ParsingException("Could not create an instance of class "+cls.getName());
+            throw new ParsingException("Could not create an instance of class "+cls.getName()+".");
         }
-        setFields(instance, args);
+        setFields(instance, fields, args);
         return instance;
     }
 
-    /**
-     * Sets fields of a given new instance.
-     * @param instance freshly created new instance of T.
-     * @param args fields to be set, in order they appear in the class. Precondition: args.length==types.length
-     */
-    private void setFields(T instance, Object[] args) {
-        for (int i = 0; i < fields.length; i++) {
-            var field = fields[i];
-            try {
-                field.set(instance, args[i]);
-            } catch (IllegalAccessException e) {
-                // Should never throw. Any issues should be caught earlier.
-                throw new RuntimeException(e);
-            }
-        }
-    }
+
 
     /**
      * Finds the no arguments constructor of the given class.
@@ -83,7 +70,7 @@ final class ParsingDataclassFactory<T> extends ParsingFactory<T> {
     }
 
     /**
-     * Finds non-static fields of the class which are not annotated with @{@code dev.olszewski.parsingdataclass.NotParsed}
+     * Finds non-static fields of the class which are not annotated with @{@code NotParsed}
      */
     private static <T> Field[] findFields(Class<T> cls) {
         return Arrays.stream(cls.getDeclaredFields())
