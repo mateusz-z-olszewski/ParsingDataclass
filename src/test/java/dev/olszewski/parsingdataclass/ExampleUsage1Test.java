@@ -42,7 +42,7 @@ class Car {
     }
 }
 
-public class ExampleUsage1 {
+public class ExampleUsage1Test {
     @Test
     void exampleUsageCarsTest() throws ParsingException {
         ParsingFactory<Car> pf = ParsingFactory.of(Car.class);

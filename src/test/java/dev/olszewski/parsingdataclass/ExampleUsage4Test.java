@@ -37,7 +37,7 @@ class Boat {
     }
 }
 
-public class ExampleUsage4 {
+public class ExampleUsage4Test {
     static ParsingFactory<Boat> pf = ParsingFactory.of(Boat.class);
     @Test
     void exampleUsageBoatTest(){

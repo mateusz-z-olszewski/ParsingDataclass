@@ -30,7 +30,7 @@ class FixedGearBike {
     }
 }
 
-public class ExampleUsage2 {
+class ExampleUsage2Test {
     static FixedGearBike cityBike = new FixedGearBike();
     static FixedGearBike roadBike = new FixedGearBike();
     static {

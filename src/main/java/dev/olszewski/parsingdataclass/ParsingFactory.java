@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 /**
  * This class can parse from a string instances of class {@code T}.
- * There are few possible places when class' regex can be declared so that it can be parsed:
+ * There are few possible places where class' regex can be declared so that it can be parsed:
  * <ul>
  *     <li>{@code T} is a record and it is annotated with {@link ParsingDataclass}.</li>
  *     <li>{@code T} is a class and it is annotated with @{@link ParsingDataclass}. This class must have a constructor
@@ -21,7 +21,7 @@ import java.util.stream.Stream;
  *     It may be either a constructor or a static factory method.</li>
  * </ul>
  * There should never be present at the same time more than one annotation which declares the
- * pattern (@{@link ParsingDataclass} or @{@link Parses})in one class due to possible ambiguity.
+ * pattern (@{@link ParsingDataclass} or @{@link Parses}) in one class due to possible ambiguity.
  *
  * @param <T>
  */
@@ -119,10 +119,6 @@ abstract public sealed class ParsingFactory<T>
      */
     public T[] parse(Collection<String> strings) throws ParsingException {
         if (strings == null) return null;
-        if (strings.isEmpty())
-            //noinspection unchecked
-            return (T[]) new Object[]{};
-
         return parse(strings.toArray(String[]::new));
     }
 
@@ -143,12 +139,12 @@ abstract public sealed class ParsingFactory<T>
     }
 
     /**
-     * Creates a new parsing factory of the given class.
+     * Creates a new parsing factory of the given class, without caching.
      *
      * @param cls Class to be parsed. Needs to adhere to rules for parsing dataclasses (see documentation).
      * @return Parsing factory of the given type
      */
-    private static <U> ParsingFactory<U> createParsingFactoryOf(Class<U> cls) {
+    public static <U> ParsingFactory<U> createParsingFactoryOf(Class<U> cls) {
         if (cls.isRecord())
             return new ParsingRecordFactory<>(cls);
 

@@ -30,8 +30,10 @@ public class ParsingFactoryTests {
     void repeatedPFsTest() {
         ParsingFactory<Digit> pf1 = ParsingFactory.of(Digit.class);
         ParsingFactory<Digit> pf2 = ParsingFactory.of(Digit.class);
+        ParsingFactory<Digit> pf3 = ParsingFactory.createParsingFactoryOf(Digit.class);
 
         assertSame(pf1, pf2);
+        assertNotSame(pf1, pf3);
     }
 
     @Test

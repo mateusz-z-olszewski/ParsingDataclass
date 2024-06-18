@@ -10,7 +10,7 @@ record Museum(
         float visitorRating
 ) {}
 
-public class ExampleUsage3 {
+public class ExampleUsage3Test {
     @Test
     void exampleUsageMuseumsTest() throws ParsingException {
         ParsingFactory<Museum> pf = ParsingFactory.of(Museum.class);
