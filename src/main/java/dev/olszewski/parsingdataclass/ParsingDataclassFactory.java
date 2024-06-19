@@ -1,21 +1,24 @@
 package dev.olszewski.parsingdataclass;
 
-import java.lang.reflect.*;
+import dev.olszewski.parsingdataclass.utils.Utils;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.regex.Pattern;
-
-import static dev.olszewski.parsingdataclass.Utils.setFields;
 
 final class ParsingDataclassFactory<T> extends ParsingFactory<T> {
     private final Constructor<T> noArgumentConstructor;
     private final Field[] fields;
+
     ParsingDataclassFactory(Class<T> cls, Pattern pattern) {
         this(cls, pattern, findConstructor(cls), findFields(cls));
     }
 
 
-
-    ParsingDataclassFactory(Class<T> cls, Pattern pattern, Constructor<T> constructor, Field[] fields){
+    ParsingDataclassFactory(Class<T> cls, Pattern pattern, Constructor<T> constructor, Field[] fields) {
         super(
                 cls,
                 pattern,
@@ -25,19 +28,11 @@ final class ParsingDataclassFactory<T> extends ParsingFactory<T> {
         this.noArgumentConstructor = constructor;
         this.fields = fields;
 
-        for (var f : fields){
-            try{
-                f.setAccessible(true);
-            } catch (InaccessibleObjectException | SecurityException e){
-                throw new InvalidDataclassException(
-                        "Could not allow for setting field "+f.getName()+" of class "+cls.getCanonicalName()+".");
-            }
+        for (var f : fields) {
+            Utils.setAccessible(f);
         }
-
-        argumentsAssert(fields.length == types.length,
-                "Class "+cls.getName()+" has an incorrect number of parsed fields: "+fields.length
-                +" instead of expected "+types.length+".");
     }
+
 
     private static boolean fieldNotStatic(Field field) {
         return !Modifier.isStatic(field.getModifiers());
@@ -49,12 +44,11 @@ final class ParsingDataclassFactory<T> extends ParsingFactory<T> {
         try {
             instance = noArgumentConstructor.newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new ParsingException("Could not create an instance of class "+cls.getName()+".");
+            throw new ParsingException("Could not create an instance of class " + cls.getName() + ".");
         }
-        setFields(instance, fields, args);
+        Utils.setFields(instance, fields, args);
         return instance;
     }
-
 
 
     /**
@@ -65,7 +59,7 @@ final class ParsingDataclassFactory<T> extends ParsingFactory<T> {
             return cls.getDeclaredConstructor();
         } catch (NoSuchMethodException e) {
             throw new InvalidDataclassException(
-                    "The given class "+cls.getCanonicalName()+" does not have a constructor taking no arguments");
+                    "The given class " + cls.getCanonicalName() + " does not have a constructor taking no arguments");
         }
     }
 

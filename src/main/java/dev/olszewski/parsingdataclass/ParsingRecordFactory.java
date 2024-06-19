@@ -1,5 +1,8 @@
 package dev.olszewski.parsingdataclass;
 
+import dev.olszewski.parsingdataclass.utils.ExcludeFromJacocoGeneratedReport;
+import dev.olszewski.parsingdataclass.utils.Utils;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -45,6 +48,7 @@ final class ParsingRecordFactory<T> extends ParsingFactory<T> {
     }
 
     @Override
+    @ExcludeFromJacocoGeneratedReport
     protected T instantiate(Object[] args) {
         try {
             return constructor.newInstance(args);

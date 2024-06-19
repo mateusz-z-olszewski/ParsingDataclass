@@ -1,5 +1,7 @@
 package dev.olszewski.parsingdataclass;
 
+import dev.olszewski.parsingdataclass.utils.ExcludeFromJacocoGeneratedReport;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -35,6 +37,7 @@ final class ParsingMethodFactory<T> extends ParsingFactory<T> {
     }
 
     @Override
+    @ExcludeFromJacocoGeneratedReport
     protected T instantiate(Object[] args) {
         try {
             //noinspection unchecked

@@ -78,7 +78,7 @@
                 <configuration>
                     <outputDirectory>./reports/</outputDirectory>
                     <excludes>
-                        <exclude>dev/olszewski/parsingdataclass/Utils</exclude>
+                        <exclude>dev/olszewski/parsingdataclass/utils/**/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

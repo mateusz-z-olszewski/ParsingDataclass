@@ -89,7 +89,7 @@ abstract public sealed class ParsingFactory<T>
      *                          an incorrect number of times.
      */
     public T parse(String string) {
-        if(string == null) return null;
+        if (string == null) return null;
         Matcher m = this.pattern.matcher(string);
         if (!m.matches()) return null;
         int groups = m.groupCount();
@@ -100,7 +100,7 @@ abstract public sealed class ParsingFactory<T>
         int s = 0;
         for (int i = 1; i <= groups; i++) {
             String stringArg = m.group(i);
-            if(stringArg != null) strings[s++] = m.group(i);
+            if (stringArg != null) strings[s++] = m.group(i);
         }
         String[] stringArgs = new String[s];
         System.arraycopy(strings, 0, stringArgs, 0, s);
@@ -167,9 +167,9 @@ abstract public sealed class ParsingFactory<T>
 
         if (ann != null)
             return new ParsingDataclassFactory<>(cls, Pattern.compile(ann.value()));
-        else if(executable instanceof Constructor)
+        else if (executable instanceof Constructor)
             //noinspection unchecked
-            return new ParsingConstructorFactory<>(cls, (Constructor<U>)executable);
+            return new ParsingConstructorFactory<>(cls, (Constructor<U>) executable);
         else
             return new ParsingMethodFactory<>(cls, (Method) executable);
     }
@@ -182,7 +182,7 @@ abstract public sealed class ParsingFactory<T>
         parsingFactories = new ParsingFactory[types.length];
         for (int i = 0; i < parsingFactories.length; i++) {
             Class<?> type = types[i];
-            if(builtinDeserializers.containsKey(type))
+            if (builtinDeserializers.containsKey(type))
                 continue;
             parsingFactories[i] = ParsingFactory.of(type);
         }
@@ -238,16 +238,16 @@ abstract public sealed class ParsingFactory<T>
      * @throws ParsingException if pattern matched an incorrect number of times
      */
     protected Object[] deserializeGroups(String[] groups) {
-        if(groups.length != types.length)
+        if (groups.length != types.length)
             throw new ParsingException(
-                    "The regex matched a different number of times than there "+
-                            "are fields in the record: "+groups.length+" matches instead "+
-                            "of expected "+types.length+"."
+                    "The regex matched a different number of times than there " +
+                            "are fields in the record: " + groups.length + " matches instead " +
+                            "of expected " + types.length + "."
             );
         Object[] args = new Object[groups.length];
         for (int i = 0; i < types.length; i++) {
             Class<?> type = types[i];
-            if(builtinDeserializers.containsKey(type))
+            if (builtinDeserializers.containsKey(type))
                 args[i] = builtinDeserializers.get(type).apply(groups[i]);
             else
                 args[i] = parsingFactories[i].parse(groups[i]);

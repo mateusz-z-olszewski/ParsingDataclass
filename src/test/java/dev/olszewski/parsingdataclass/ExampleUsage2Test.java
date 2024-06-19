@@ -11,9 +11,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class FixedGearBike {
     String model;
     int year;
-    float gearRatio;
+    private float gearRatio;
     @NotParsed
     String frameNumber;
+
+    static int someStaticField;
 
     FixedGearBike(){}
 
@@ -28,6 +30,14 @@ class FixedGearBike {
         if (Double.compare(gearRatio, that.gearRatio) != 0) return false;
         return Objects.equals(model, that.model);
     }
+
+    public float getGearRatio() {
+        return gearRatio;
+    }
+
+    public void setGearRatio(float gearRatio) {
+        this.gearRatio = gearRatio;
+    }
 }
 
 class ExampleUsage2Test {
@@ -36,12 +46,12 @@ class ExampleUsage2Test {
     static {
         cityBike.model = "City Bike brand ABC";
         cityBike.year = 2023;
-        cityBike.gearRatio = 1.75f;
+        cityBike.setGearRatio(1.75f);
         cityBike.frameNumber="ABC1234";
 
         roadBike.model = "Road Bikes 101";
         roadBike.year = 2010;
-        roadBike.gearRatio = 2.45f;
+        roadBike.setGearRatio(2.45f);
     }
     @Test
     void exampleUsageBikesTest() throws ParsingException {

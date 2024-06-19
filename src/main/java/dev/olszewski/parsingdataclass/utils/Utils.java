@@ -1,7 +1,9 @@
-package dev.olszewski.parsingdataclass;
+package dev.olszewski.parsingdataclass.utils;
+
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InaccessibleObjectException;
 import java.lang.reflect.RecordComponent;
 import java.util.Arrays;
 
@@ -38,6 +40,19 @@ public class Utils {
             } catch (IllegalAccessException e) {
                 throw new RuntimeException("Unexpected error encountered.");
             }
+        }
+    }
+
+    /**
+     * Sets field to be accessible.
+     */
+    public static void setAccessible(Field f) {
+        try{
+            f.setAccessible(true);
+        } catch (InaccessibleObjectException | SecurityException e){
+            throw new RuntimeException(
+                    "Exception occurred when trying to allow for setting field "+ f.getName()+
+                    " of class "+ f.getClass().getCanonicalName()+".");
         }
     }
 }
