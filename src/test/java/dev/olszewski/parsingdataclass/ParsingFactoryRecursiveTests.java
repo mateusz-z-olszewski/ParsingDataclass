@@ -37,7 +37,7 @@ class Sheep {
     String name;
     Ordinal ordinal;
 
-    @Parses("dev.olszewski.parsingdataclass.Sheep called ([^:]+): ?(.+)")
+    @Parses("Sheep called ([^:]+): ?(.+)")
     Sheep(String name, Ordinal ordinal) {
         this.name = name;
         this.ordinal = ordinal;
@@ -71,7 +71,7 @@ public class ParsingFactoryRecursiveTests {
     void simpleRecursiveTest() {
         assertEquals(
                 new Sheep("Shaun", new Ordinal(1)),
-                pf.parse("dev.olszewski.parsingdataclass.Sheep called Shaun: #1")
+                pf.parse("Sheep called Shaun: #1")
         );
     }
 

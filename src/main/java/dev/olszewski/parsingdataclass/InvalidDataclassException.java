@@ -8,6 +8,10 @@ package dev.olszewski.parsingdataclass;
  * and therefore can be checked by the developer to be valid.
  */
 public class InvalidDataclassException extends IllegalArgumentException  {
+    /**
+     * Constructor for InvalidDataclassException.
+     * @param s error message
+     */
     public InvalidDataclassException(String s) {
         super(s);
     }

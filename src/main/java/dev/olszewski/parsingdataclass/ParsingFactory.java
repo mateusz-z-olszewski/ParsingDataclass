@@ -23,7 +23,7 @@ import java.util.stream.Stream;
  * There should never be present at the same time more than one annotation which declares the
  * pattern (@{@link ParsingDataclass} or @{@link Parses}) in one class due to possible ambiguity.
  *
- * @param <T>
+ * @param <T> type that is being built by this factory.
  */
 abstract public sealed class ParsingFactory<T>
         permits ParsingConstructorFactory, ParsingDataclassFactory, ParsingMethodFactory, ParsingRecordFactory {
@@ -62,8 +62,9 @@ abstract public sealed class ParsingFactory<T>
      * to speed up the process of creation. To avoid caching, use
      * {@link ParsingFactory#createParsingFactoryOf(Class)}
      *
-     * @param cls Class to be parsed. Needs to adhere to rules for parsing dataclasses (see documentation).
-     * @return Parsing factory of the given type
+     * @param <U> type of which to create a parsing factory.
+     * @param cls class to  be parsed. Needs to adhere to rules for parsing dataclasses (see documentation).
+     * @return Parsing factory of the given type.
      */
     @SuppressWarnings("unchecked")
     public static synchronized <U> ParsingFactory<U> of(Class<U> cls) {
@@ -220,6 +221,7 @@ abstract public sealed class ParsingFactory<T>
     /**
      * More readable shortcut for {@code if(!b) throw new InvalidDataClassException(s); }.
      * To be used regarding parsing arguments.
+     *
      */
     protected static void argumentsAssert(boolean b, String s) throws InvalidDataclassException {
         if (!b) throw new InvalidDataclassException(s);
